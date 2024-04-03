@@ -9,20 +9,22 @@ def check_battle():
 
 def kill_monster():
     while True:
-        if pg.locateOnScreen('imgs/region_battle.png',region=constants.REGION_BATTLE) or pg.locateOnScreen('imgs/region_battle2.png', confidence=0.9):
+        if pg.locateOnScreen('imgs/region_battle.png', confidence=0.8, region=constants.REGION_BATTLE) or pg.locateOnScreen('imgs/region_battle2.png', confidence=0.9, region=constants.REGION_BATTLE):
             break
         is_battle = check_battle()
         if is_battle == None:
             pg.press('space')
-            while pg.locateOnScreen('imgs/battle_red.png',confidence=0.8, region=constants.REGION_BATTLE) !=None or pg.locateOnScreen('imgs/battle_red2.png', confidence=0.7, region=constants.REGION_BATTLE) !=None:
-                if pg.locateOnScreen('imgs/region_battle.png') or pg.locateOnScreen('imgs/region_battle2.png', confidence=0.9):
-                    pg.scroll(1)
-                    pg.sleep(1)
+            # battleKnight()
+            while pg.locateOnScreen('imgs/battle_red.png',confidence=0.7, region=constants.REGION_BATTLE) !=None or pg.locateOnScreen('imgs/battle_red2.png', confidence=0.7, region=constants.REGION_BATTLE) !=None:
+                if pg.locateOnScreen('imgs/region_battle.png', region=constants.REGION_BATTLE, confidence=0.9) or pg.locateOnScreen('imgs/region_battle2.png', region=constants.REGION_BATTLE, confidence=0.9):
+                    # pg.sleep(1)
                     break
-                print('esperando o monstro morrer') 
-            time.sleep(1)
+                print('esperando o monstro morrer')
+                # battleKnight()
+            # time.sleep(1)
             print('procurando outro monstro')
         print(is_battle)
+    pg.scroll(150)
 
 
 
@@ -63,21 +65,39 @@ def hole_up(img_anchor, plus_X,plus_Y):
 
 
 
-def goto(img):
+def goto(img,delay=7):
     if img:
         imagem = img
         vai = pg.locateOnScreen(img, confidence=0.8,region=constants.REGION_MINIMAP)
+        if vai is None:
+            print('nao consegui achar o local')
         if vai is not None:
             x, y = pg.center(vai)
             pg.moveTo(x, y)
             pg.click()
-            pg.moveTo(100,100)
-            pg.sleep(15)
+            pg.moveTo(300,500)
+            pg.sleep(delay)
             kill_monster()
             if pg.locateOnScreen('imgs/fotobase.png',confidence=0.9, region=constants.REGION_MINIMAP) != None or pg.locateOnScreen('imgs/fotobaseh.png',confidence=0.9, region=constants.REGION_MINIMAP):
                 print('nao chegou ainda no local!!')
                 kill_monster()
                 print('indo ao local!')
                 goto(imagem)
+        
 
+def battleKnight():
+    if (pg.locateOnScreen('imgs/exori.png',confidence=0.8, region=constants.REGION_EXORI)):
+        pg.press('F7')
+        print('dando exori')
+        return
+    
+    elif (pg.locateOnScreen('imgs/exoriico.png', confidence=0.7, region=constants.REGION_EXORI_ICO)):
+        pg.press('F6')
+        print('dando exori ico')
+        return
+    
+    else:
+        print('nao usando nada')
+        return
+    
             

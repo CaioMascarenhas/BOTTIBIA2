@@ -1,6 +1,7 @@
 import pyautogui as pg
 import keyboard  
 import wasp_script
+import pirat_script_lb
 import threading
 import time
 import rot_lb_script
@@ -8,6 +9,7 @@ import rot_lb_script
 def main():
     print('Welcome to tibia bot! choose the specified script you wanna use!.')
     print('rot_lb_script = 1')
+    print('pirat_script_lb = 2')
 
     script = int(input())
 
@@ -16,6 +18,13 @@ def main():
         keyboard.wait('h')
         while True:
             rot_lb_script.hunt_rot()
+            time.sleep(1)
+
+    if script == 2:
+        print('digite a letra: h para começar!.')
+        keyboard.wait('h')
+        while True:
+            pirat_script_lb.hunt_pirat()
             time.sleep(1)
         
 
