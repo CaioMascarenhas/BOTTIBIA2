@@ -2,7 +2,7 @@ import pyautogui as pg
 import time
 
 def check_battle():
-    return pg.locateOnScreen('imgs/exoriico.png', confidence=0.7)
+    return pg.locateOnScreen('ssamight_img/MIGHT_NO_DEDO.png', confidence=0.9)
 
 while True:
     try:

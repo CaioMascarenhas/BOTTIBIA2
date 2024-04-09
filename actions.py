@@ -1,6 +1,8 @@
 import pyautogui as pg
 import time
 import constants
+from pynput.mouse import Button, Controller
+mouse = Controller()
 pg.useImageNotFoundException(False)
 
 
@@ -24,7 +26,8 @@ def kill_monster():
             # time.sleep(1)
             print('procurando outro monstro')
         print(is_battle)
-    pg.scroll(150)
+    mouse.click(Button.middle, 1)
+    time.sleep(0.7)
 
 
 
